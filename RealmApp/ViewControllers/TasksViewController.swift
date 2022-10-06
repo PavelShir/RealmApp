@@ -63,19 +63,19 @@ class TasksViewController: UITableViewController {
         let task = currentTasks[indexPath.row]
         
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
-            StorageManager.shared.delete(tasks)
+            StorageManager.shared.deleteTask(task)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
         
         let editAction = UIContextualAction(style: .normal, title: "Edit") { [unowned self] _, _, isDone in
-            showAlert(with: taskList) {
+            showAlert(with: task) {
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
             isDone(true)
         }
         
         let doneAction = UIContextualAction(style: .normal, title: "Done") { _, _, isDone in
-            StorageManager.shared.done(taskList)
+            StorageManager.shared.doneTask(task)
             tableView.reloadRows(at: [indexPath], with: .automatic)
             isDone(true)
         }
